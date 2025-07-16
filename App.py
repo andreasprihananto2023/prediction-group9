@@ -40,6 +40,10 @@ st.markdown("""
         border-radius: 10px;
         border-left: 4px solid #FF6B6B;
     }
+    .metric-card p {
+        color: #333333;
+        margin: 0.5rem 0;
+    }
 </style>
 """, unsafe_allow_html=True)
 
