@@ -146,7 +146,7 @@ pizza_complexity = st.sidebar.selectbox(
     "Pizza Complexity",
     min_value=1,
     max_value=20,
-    value=1.0,
+    value=1,
     step=1,
     help="Based on preparation difficulty"
 )
