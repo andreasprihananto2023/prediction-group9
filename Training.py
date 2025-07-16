@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
 import joblib
-import streamlit as st
 
 # Load data
 data = pd.read_excel('Train Data.xlsx')
@@ -93,26 +92,10 @@ gb_grid.fit(X_train_scaled, y_train)
 print(f"Best GB parameters: {gb_grid.best_params_}")
 best_gb = gb_grid.best_estimator_
 
-# 7. ENSEMBLE MODEL - Kombinasi RF dan GB
-class EnsembleModel:
-    def __init__(self, rf_model, gb_model, rf_weight=0.5, gb_weight=0.5):
-        self.rf_model = rf_model
-        self.gb_model = gb_model
-        self.rf_weight = rf_weight
-        self.gb_weight = gb_weight
-    
-    def predict(self, X):
-        rf_pred = self.rf_model.predict(X)
-        gb_pred = self.gb_model.predict(X)
-        return self.rf_weight * rf_pred + self.gb_weight * gb_pred
-
-ensemble_model = EnsembleModel(best_rf, best_gb)
-
-# 8. EVALUASI SEMUA MODEL
+# 7. EVALUASI MODEL (TANPA ENSEMBLE)
 models = {
     'Random Forest': best_rf,
-    'Gradient Boosting': best_gb,
-    'Ensemble': ensemble_model
+    'Gradient Boosting': best_gb
 }
 
 print("\n" + "="*50)
@@ -124,11 +107,10 @@ best_mse = float('inf')
 
 for name, model in models.items():
     # Cross-validation
-    if name != 'Ensemble':
-        cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='neg_mean_squared_error')
-        cv_rmse = np.sqrt(-cv_scores.mean())
-        print(f"\n{name}:")
-        print(f"CV RMSE: {cv_rmse:.3f} ± {np.sqrt(cv_scores.std()):.3f}")
+    cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='neg_mean_squared_error')
+    cv_rmse = np.sqrt(-cv_scores.mean())
+    print(f"\n{name}:")
+    print(f"CV RMSE: {cv_rmse:.3f} ± {np.sqrt(cv_scores.std()):.3f}")
     
     # Prediksi pada test set
     y_pred = model.predict(X_test_scaled)
@@ -149,7 +131,7 @@ for name, model in models.items():
         best_mse = mse
         best_model = (name, model)
 
-# 9. ANALISIS FEATURE IMPORTANCE
+# 8. ANALISIS FEATURE IMPORTANCE
 print("\n" + "="*50)
 print("FEATURE IMPORTANCE (Random Forest)")
 print("="*50)
@@ -162,7 +144,7 @@ feature_importance = pd.DataFrame({
 
 print(feature_importance)
 
-# 10. VISUALISASI HASIL
+# 9. VISUALISASI HASIL
 plt.figure(figsize=(15, 10))
 
 # Plot 1: Feature Importance
@@ -217,7 +199,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
 
-# 11. PREDIKSI UNTUK DATA BARU
+# 10. PREDIKSI UNTUK DATA BARU
 print("\n" + "="*50)
 print("CONTOH PREDIKSI UNTUK DATA BARU")
 print("="*50)
@@ -250,7 +232,7 @@ prediction = best_model[1].predict(sample_scaled)[0]
 print(f"Prediksi delivery duration: {prediction:.2f} menit")
 print(f"Model terbaik: {best_model[0]}")
 
-# 12. SAVE MODEL DAN SCALER
+# 11. SAVE MODEL DAN SCALER
 print("\n" + "="*50)
 print("MENYIMPAN MODEL DAN SCALER")
 print("="*50)
@@ -281,7 +263,7 @@ def save_with_joblib(model, scaler, model_path='best_model.joblib', scaler_path=
     print(f"Model saved to {model_path}")
     print(f"Scaler saved to {scaler_path}")
 
-# Simpan model terbaik dan scaler
+# Simpan model terbaik dan scaler (INDIVIDUAL MODEL, BUKAN ENSEMBLE)
 print(f"Menyimpan model terbaik: {best_model[0]}")
 save_model_and_scaler(best_model[1], scaler)
 
