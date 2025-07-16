@@ -378,4 +378,4 @@ with col2:
 
 # Footer
 st.markdown("---")
-st.markdown("Made with ❤️ using Streamlit | Pizza Delivery Time Predictor v1.0")
+st.markdown("Made by Group 9 | Pizza Delivery Time Predictor v1.0")
