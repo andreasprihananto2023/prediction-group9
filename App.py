@@ -142,7 +142,7 @@ topping_density = st.sidebar.slider(
     help="How densely packed the toppings are (0.1 = light, 2.0 = heavy)"
 )
 
-pizza_complexity = st.sidebar.selectbox(
+pizza_complexity = st.sidebar.slider(
     "Pizza Complexity",
     min_value=1,
     max_value=20,
