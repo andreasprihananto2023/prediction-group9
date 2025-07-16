@@ -118,15 +118,15 @@ pizza_size = st.sidebar.selectbox(
 
 pizza_type = st.sidebar.selectbox(
     "Pizza Type",
-    options=[1, 2, 3, 4, 5],
-    format_func=lambda x: {1: "Margherita", 2: "Pepperoni", 3: "Hawaiian", 4: "Meat Lovers", 5: "Vegetarian"}[x],
+    options=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    format_func=lambda x: {1: "Vegan", 2: "Non-Vegan", 3: "Cheese Burst", 4: "Gluten-Free", 5: "Stuffed Crust", 6: "Thin Crust", 7: "Deep Fish", 8: "Thai Chicken", 9: "Sicilian", 10: "BBQ Chicken", 11: "Margarita"}[x],
     index=0
 )
 
 toppings_count = st.sidebar.slider(
     "Number of Toppings",
     min_value=1,
-    max_value=10,
+    max_value=5,
     value=3,
     step=1,
     help="Total number of toppings on the pizza"
@@ -143,9 +143,10 @@ topping_density = st.sidebar.slider(
 
 pizza_complexity = st.sidebar.selectbox(
     "Pizza Complexity",
-    options=[1, 2, 3, 4, 5],
-    format_func=lambda x: {1: "Very Simple", 2: "Simple", 3: "Medium", 4: "Complex", 5: "Very Complex"}[x],
-    index=2,
+    min_value=1,
+    max_value=20,
+    value=1.0,
+    step=1,
     help="Based on preparation difficulty"
 )
 
@@ -154,7 +155,7 @@ st.sidebar.subheader("Delivery Information")
 distance = st.sidebar.slider(
     "Distance (km)",
     min_value=0.5,
-    max_value=20.0,
+    max_value=15.0,
     value=5.0,
     step=0.5,
     help="Distance from restaurant to delivery location"
@@ -162,8 +163,8 @@ distance = st.sidebar.slider(
 
 traffic_level = st.sidebar.selectbox(
     "Traffic Level",
-    options=[1, 2, 3, 4, 5],
-    format_func=lambda x: {1: "Very Light", 2: "Light", 3: "Medium", 4: "Heavy", 5: "Very Heavy"}[x],
+    options=[1, 2, 3],
+    format_func=lambda x: {1: "Low", 2: "Medium", 3: "High"}[x],
     index=2
 )
 
@@ -180,11 +181,11 @@ order_hour = st.sidebar.slider(
 )
 
 order_month = st.sidebar.selectbox(
-    "Day of Week",
-    options=[1, 2, 3, 4, 5, 6, 7],
-    format_func=lambda x: {1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday", 7: "Sunday"}[x],
+    "Order Month",
+    options=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    format_func=lambda x: {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}[x],
     index=4,
-    help="Day of the week (used as Order Month in the model)"
+    help="Month of Order Placed"
 )
 
 # Main content area
