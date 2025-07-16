@@ -222,7 +222,7 @@ with col1:
             <p><strong>Type:</strong> {["", "Vegan", "Non-Vegan", "Cheese Burst", "Gluten-Free", "Stuffed Crust", "Thin Crust",
                                        "Deep Fish", "Thai Chicken", "Sicilian", "BBQ Chicken", "Margarita"][pizza_type]}</p>
             <p><strong>Toppings:</strong> {toppings_count}</p>
-            <p><strong>Complexity:</strong> {["", "Very Simple", "Simple", "Medium", "Complex", "Very Complex"][pizza_complexity]}</p>
+            <p><strong>Complexity:</strong> {pizza_complexity}</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -231,7 +231,7 @@ with col1:
         <div class="metric-card">
             <h4>🚚 Delivery Info</h4>
             <p><strong>Distance:</strong> {distance} km</p>
-            <p><strong>Traffic:</strong> {["", "Very Light", "Light", "Medium", "Heavy", "Very Heavy"][traffic_level]}</p>
+            <p><strong>Traffic:</strong> {["", "Low", "Medium", "High"][traffic_level]}</p>
             <p><strong>Rush Hour:</strong> {'Yes' if input_enhanced['Is_Rush_Hour'].iloc[0] else 'No'}</p>
             <p><strong>Weekend:</strong> {'Yes' if input_enhanced['Is_Weekend'].iloc[0] else 'No'}</p>
         </div>
@@ -242,7 +242,8 @@ with col1:
         <div class="metric-card">
             <h4>⏰ Timing</h4>
             <p><strong>Order Hour:</strong> {order_hour:02d}:00</p>
-            <p><strong>Day:</strong> {["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][order_month]}</p>
+            <p><strong>Month:</strong> {["", "January", "February", "March", "April", "May", "June", "July", "August",
+                                        "September", "October", "November", "December"][order_month]}</p>
             <p><strong>Topping Density:</strong> {topping_density}</p>
         </div>
         """, unsafe_allow_html=True)
