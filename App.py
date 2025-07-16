@@ -119,7 +119,8 @@ pizza_size = st.sidebar.selectbox(
 pizza_type = st.sidebar.selectbox(
     "Pizza Type",
     options=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    format_func=lambda x: {1: "Vegan", 2: "Non-Vegan", 3: "Cheese Burst", 4: "Gluten-Free", 5: "Stuffed Crust", 6: "Thin Crust", 7: "Deep Fish", 8: "Thai Chicken", 9: "Sicilian", 10: "BBQ Chicken", 11: "Margarita"}[x],
+    format_func=lambda x: {1: "Vegan", 2: "Non-Vegan", 3: "Cheese Burst", 4: "Gluten-Free", 5: "Stuffed Crust", 6: "Thin Crust",
+                           7: "Deep Fish", 8: "Thai Chicken", 9: "Sicilian", 10: "BBQ Chicken", 11: "Margarita"}[x],
     index=0
 )
 
@@ -218,7 +219,8 @@ with col1:
         <div class="metric-card">
             <h4>🍕 Pizza Details</h4>
             <p><strong>Size:</strong> {["", "Small", "Medium", "Large", "Extra Large"][pizza_size]}</p>
-            <p><strong>Type:</strong> {["", "Margherita", "Pepperoni", "Hawaiian", "Meat Lovers", "Vegetarian"][pizza_type]}</p>
+            <p><strong>Type:</strong> {["", "Vegan", "Non-Vegan", "Cheese Burst", "Gluten-Free", "Stuffed Crust", "Thin Crust",
+                                       "Deep Fish", "Thai Chicken", "Sicilian", "BBQ Chicken", "Margarita"][pizza_type]}</p>
             <p><strong>Toppings:</strong> {toppings_count}</p>
             <p><strong>Complexity:</strong> {["", "Very Simple", "Simple", "Medium", "Complex", "Very Complex"][pizza_complexity]}</p>
         </div>
